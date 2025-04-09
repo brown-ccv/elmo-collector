@@ -1,7 +1,10 @@
 use elmo_collector::{NodeType, db_insert, query_slurm};
+use std::time::Instant;
 
 #[tokio::main]
 async fn main() {
+    let t1 = Instant::now();
+    
     let pool = db_insert::get_db_pool().await;
 
     let cpu_info = query_slurm::get_cpu_info();
@@ -17,6 +20,10 @@ async fn main() {
     db_insert::insert_powersave_node_info(&pool, &NodeType::Gpu, &powersave_gpu_info).await;
     db_insert::insert_powersave_node_info(&pool, &NodeType::All, &powersave_all_info).await;
 
+    let elapsed = t1.elapsed();
+
     println!("CPU Info: {:?}", cpu_info);
     println!("GPU Info: {:?}", gpu_info);
+
+    println!("Run time: {:?}", elapsed);
 }

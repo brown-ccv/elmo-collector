@@ -15,7 +15,7 @@ pub struct DbConfig {
 pub async fn get_db_pool() -> PgPool {
     let builder =
         Config::builder().add_source(File::new("secrets/db_config.yml", FileFormat::Yaml));
-
+    
     let db_config = match builder.build() {
         Ok(config) => config.try_deserialize::<DbConfig>().unwrap(),
         Err(e) => {
@@ -35,8 +35,8 @@ pub async fn get_db_pool() -> PgPool {
 
 pub async fn insert_cpu_info(pool: &PgPool, cpu_info: &CpuUtilization) {
     sqlx::query(
-        "INSERT INTO cpu (allocated, n_idle, n_other, total) 
-         VALUES ($1, $2, $3, $4)",
+        "INSERT INTO oscar.cpu (time, allocated, idle, other, total) 
+         VALUES (CURRENT_TIMESTAMP, $1, $2, $3, $4)",
     )
     .bind(cpu_info.n_alloc)
     .bind(cpu_info.n_idle)
@@ -49,8 +49,8 @@ pub async fn insert_cpu_info(pool: &PgPool, cpu_info: &CpuUtilization) {
 
 pub async fn insert_gpu_info(pool: &PgPool, gpu_info: &GpuUtilization) {
     sqlx::query(
-        "INSERT INTO gpu (allocated, total) 
-         VALUES ($1, $2)",
+        "INSERT INTO oscar.gpu (time, allocated, total) 
+         VALUES (CURRENT_TIMESTAMP, $1, $2)",
     )
     .bind(gpu_info.n_alloc)
     .bind(gpu_info.n_total)
@@ -71,7 +71,7 @@ pub async fn insert_powersave_node_info(
     };
 
     let query = format!(
-        "INSERT INTO {} (power_save, total) VALUES ($1, $2)",
+        "INSERT INTO oscar.{} (time, power_save, total) VALUES (CURRENT_TIMESTAMP, $1, $2)",
         table_name
     );
 
