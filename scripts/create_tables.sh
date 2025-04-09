@@ -2,5 +2,5 @@
 
 source secrets/db_secrets.sh
 
-psql --host ${DB_HOST} --username postgres --dbname elmo -f create_tables.sql
+psql --host ${DB_HOST} --username postgres --dbname elmo -f sql/create_tables.sql
 
