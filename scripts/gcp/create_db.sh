@@ -33,7 +33,8 @@ sleep 60
 
 # Add authorized network, otherwise we need to use the Cloud SQL proxy (see below)
 gcloud sql instances patch elmo \
-  --authorized-networks=128.148.194.11/32
+  --authorized-networks=128.148.194.11/32,128.148.128.30/32
+
 
 
 # NOTE: The following is NOT NEEDED when we specify the authorized network above
