@@ -30,7 +30,7 @@ pub fn get_cpu_info() -> CpuUtilization {
 pub fn get_gpu_info() -> GpuUtilization {
     let n_alloc = Command::new("bash")
         .arg("-c")
-        .arg("squeue -h -t R -O gres,nodelist | rg gpu: | cut -d: -f 2 | cut -d ' ' -f 1 | grep -o '[0-9]\\+' | paste -sd+ - | b")
+        .arg("squeue -h -t R -O gres,nodelist | rg gpu: | cut -d: -f 2 | cut -d ' ' -f 1 | grep -o '[0-9]\\+' | paste -sd+ - | bc")
         .output()
         .expect("Failed to execute command to get allocated GPUs");
 
