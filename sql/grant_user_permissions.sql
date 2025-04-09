@@ -1,9 +1,54 @@
-
 GRANT ALL PRIVILEGES ON DATABASE elmo TO elmo_svc;
+
 GRANT ALL PRIVILEGES ON SCHEMA oscar TO elmo_svc;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO elmo_svc;
+
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA oscar TO elmo_svc;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO elmo_svc;
+
 ALTER DEFAULT PRIVILEGES IN SCHEMA oscar GRANT ALL PRIVILEGES ON TABLES TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA oscar TO elmo_svc;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO elmo_svc;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA oscar GRANT ALL PRIVILEGES ON SEQUENCES TO elmo_svc;
+
+GRANT USAGE ON SEQUENCE oscar.cpu_id_seq
+    TO elmo_svc;
+
+GRANT INSERT ON TABLE oscar.cpu TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON TABLE oscar.cpu TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON SEQUENCE oscar.cpu_id_seq
+    TO elmo_svc;
+
+GRANT USAGE ON SEQUENCE oscar.gpu_id_seq
+    TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON SEQUENCE oscar.gpu_id_seq
+    TO elmo_svc;
+
+GRANT USAGE ON SEQUENCE oscar.power_save_id_seq
+    TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON SEQUENCE oscar.power_save_id_seq
+    TO elmo_svc;
+
+GRANT USAGE ON SEQUENCE oscar.power_save_cpu_id_seq
+    TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON SEQUENCE oscar.power_save_cpu_id_seq
+    TO elmo_svc;
+
+GRANT USAGE ON SEQUENCE oscar.power_save_gpu_id_seq
+    TO elmo_svc;
+
+GRANT ALL PRIVILEGES ON SEQUENCE oscar.power_save_gpu_id_seq
+    TO elmo_svc;
+
